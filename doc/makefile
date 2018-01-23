@@ -1,0 +1,2 @@
+doc: xnmea.doxygen
+	doxygen $^
