@@ -2,8 +2,8 @@
 mkdir build
 cd build
 
-mkdir vc
-cd vc
+mkdir msvc
+cd msvc
 
 cmake -G "NMake Makefiles" ../..
 cmake --build .

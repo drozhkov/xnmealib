@@ -20,7 +20,7 @@ int main()
     info.fix = 3;
     info.lat = 5000.0;
     info.lon = 3600.0;
-    info.speed = 2.14 * NMEA_TUS_MS;
+    info.speed = 2.14 * XNMEA_TUS_MS;
     info.elv = 10.86;
 
     info.satinfo.inuse = 1;
@@ -38,8 +38,8 @@ int main()
     {
         gen_sz = xnmea_generate(
             &buff[0], 2048, &info,
-            GGA | GSA | GSV | RMC | VTG
-            );
+            GGA | GSA | GSV | RMC | VTG,
+            XNMEA_SOURCE_GPS );
 
         buff[gen_sz] = 0;
         printf("%s\n", &buff[0]);

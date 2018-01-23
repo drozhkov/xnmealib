@@ -66,11 +66,20 @@ int main()
         printf("\n");
         printf("Distance P0 to P%d\ton spheroid:  %14.3lf m\n", it, dist[it][0]);
         printf("Distance P0 to P%d\ton ellipsoid: %14.3lf m\n", it, dist[it][1]);
-        printf("Azimuth  P0 to P%d\tat start: %8.3lf�\tat end: %8.3lf�\n", it, xnmea_radian2degree(azimuth[it][0]), xnmea_radian2degree(azimuth[it][1]));
-        printf("Move     P0 to P%d\t         \tAzimuth at end: %8.3lf�\n", it, xnmea_radian2degree(azimuth_moved[it]));
-        printf("Move     P0 to P%d\ton spheroid:  %3s lat:%+010.6lf� lon:%+011.6lf�\n", it, result[0] == 1 ? "OK" : "nOK", xnmea_radian2degree(pos_moved[it][0].lat), nmea_radian2degree(pos_moved[it][0].lon));
-        printf("Move     P0 to P%d\ton ellipsoid: %3s lat:%+010.6lf� lon:%+011.6lf�\n", it, result[0] == 1 ? "OK" : "nOK", xnmea_radian2degree(pos_moved[it][1].lat), nmea_radian2degree(pos_moved[it][1].lon));
-        printf("Move     P0 to P%d\toriginal:         lat:%+010.6lf� lon:%+011.6lf�\n", it, xnmea_radian2degree(pos[it].lat), xnmea_radian2degree(pos[it].lon));
+        printf("Azimuth  P0 to P%d\tat start: %8.3lf�\tat end: %8.3lf�\n",
+            it, xnmea_radian2degree(azimuth[it][0]), xnmea_radian2degree(azimuth[it][1]));
+
+        printf("Move     P0 to P%d\t         \tAzimuth at end: %8.3lf�\n",
+            it, xnmea_radian2degree(azimuth_moved[it]));
+
+        printf("Move     P0 to P%d\ton spheroid:  %3s lat:%+010.6lf� lon:%+011.6lf�\n",
+            it, result[0] == 1 ? "OK" : "nOK", xnmea_radian2degree(pos_moved[it][0].lat), xnmea_radian2degree(pos_moved[it][0].lon));
+
+        printf("Move     P0 to P%d\ton ellipsoid: %3s lat:%+010.6lf� lon:%+011.6lf�\n",
+            it, result[0] == 1 ? "OK" : "nOK", xnmea_radian2degree(pos_moved[it][1].lat), xnmea_radian2degree(pos_moved[it][1].lon));
+
+        printf("Move     P0 to P%d\toriginal:         lat:%+010.6lf� lon:%+011.6lf�\n", it,
+            xnmea_radian2degree(pos[it].lat), xnmea_radian2degree(pos[it].lon));
     }
 
     return 0;

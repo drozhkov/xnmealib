@@ -35,6 +35,9 @@ static const char * xnmea_source_name(xnmeaSOURCE source)
 
         case XNMEA_SOURCE_GPS:
             return "GP";
+
+        case XNMEA_SOURCE_GLONASS_GPS:
+            return "GN";
     }
 
     return "??";

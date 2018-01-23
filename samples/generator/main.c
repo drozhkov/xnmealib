@@ -24,7 +24,8 @@ int main()
     {
         gen_sz = xnmea_generate_from(
             &buff[0], 2048, &info, gen,
-            GGA | GSA | GSV | RMC | VTG
+            GGA | GSA | GSV | RMC | VTG,
+            XNMEA_SOURCE_GPS
             );
 
         buff[gen_sz] = 0;
