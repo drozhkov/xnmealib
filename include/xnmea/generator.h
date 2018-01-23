@@ -50,7 +50,7 @@ int     xnmea_generate_from(
         char *buff, int buff_sz,        /* buffer */
         xnmeaINFO *info,                /* source info */
         struct _xnmeaGENERATOR *gen,    /* generator */
-        int generate_mask,              /* mask of sentence`s (e.g. GPGGA | GPGSA) */
+        int generate_mask,              /* mask of sentence`s (e.g. XNMEA_PACKTYPE_GGA | XNMEA_PACKTYPE_GSA) */
         xnmeaSOURCE source
         );
 

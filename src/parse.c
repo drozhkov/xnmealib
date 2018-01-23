@@ -20,45 +20,6 @@
  * \brief Functions of a low level for analysis of
  * packages of NMEA stream.
  *
- * \code
- * ...
- * ptype = nmea_pack_type(
- *     (const char *)parser->buffer + nparsed + 1,
- *     parser->buff_use - nparsed - 1);
- *
- * if(0 == (node = malloc(sizeof(nmeaParserNODE))))
- *     goto mem_fail;
- *
- * node->pack = 0;
- *
- * switch(ptype)
- * {
- * case GPGGA:
- *     if(0 == (node->pack = malloc(sizeof(nmeaGPGGA))))
- *         goto mem_fail;
- *     node->packType = GPGGA;
- *     if(!nmea_parse_GPGGA(
- *         (const char *)parser->buffer + nparsed,
- *         sen_sz, (nmeaGPGGA *)node->pack))
- *     {
- *         free(node);
- *         node = 0;
- *     }
- *     break;
- * case GPGSA:
- *     if(0 == (node->pack = malloc(sizeof(nmeaGPGSA))))
- *         goto mem_fail;
- *     node->packType = GPGSA;
- *     if(!nmea_parse_GPGSA(
- *         (const char *)parser->buffer + nparsed,
- *         sen_sz, (nmeaGPGSA *)node->pack))
- *     {
- *         free(node);
- *         node = 0;
- *     }
- *     break;
- * ...
- * \endcode
  */
 
 #include "xnmea/tok.h"
@@ -117,22 +78,22 @@ int xnmea_pack_type(const char *buff, int buff_sz)
     XNMEA_ASSERT(buff);
 
     if(buff_sz < 5)
-        return NON;
+        return XNMEA_PACKTYPE_NON;
 
     buff += 2;
 
     if(0 == memcmp(buff, pheads[0], 3))
-        return GGA;
+        return XNMEA_PACKTYPE_GGA;
     else if(0 == memcmp(buff, pheads[1], 3))
-        return GSA;
+        return XNMEA_PACKTYPE_GSA;
     else if(0 == memcmp(buff, pheads[2], 3))
-        return GSV;
+        return XNMEA_PACKTYPE_GSV;
     else if(0 == memcmp(buff, pheads[3], 3))
-        return RMC;
+        return XNMEA_PACKTYPE_RMC;
     else if(0 == memcmp(buff, pheads[4], 3))
-        return VTG;
+        return XNMEA_PACKTYPE_VTG;
 
-    return NON;
+    return XNMEA_PACKTYPE_NON;
 }
 
 /**
@@ -410,7 +371,7 @@ void xnmea_GGA2info(xnmeaGGA *pack, xnmeaINFO *info)
     info->elv = pack->elv;
     info->lat = ((pack->ns == 'N')?pack->lat:-(pack->lat));
     info->lon = ((pack->ew == 'E')?pack->lon:-(pack->lon));
-    info->smask |= GGA;
+    info->smask |= XNMEA_PACKTYPE_GGA;
 }
 
 /**
@@ -442,7 +403,7 @@ void xnmea_GSA2info(xnmeaGSA *pack, xnmeaINFO *info)
     }
 
     info->satinfo.inuse = nuse;
-    info->smask |= GSA;
+    info->smask |= XNMEA_PACKTYPE_GSA;
 }
 
 /**
@@ -477,7 +438,7 @@ void xnmea_GSV2info(xnmeaGSV *pack, xnmeaINFO *info)
         info->satinfo.sat[isi].sig = pack->sat_data[isat].sig;
     }
 
-    info->smask |= GSV;
+    info->smask |= XNMEA_PACKTYPE_GSV;
 }
 
 /**
@@ -507,7 +468,7 @@ void xnmea_RMC2info(xnmeaRMC *pack, xnmeaINFO *info)
     info->lon = ((pack->ew == 'E')?pack->lon:-(pack->lon));
     info->speed = pack->speed * XNMEA_TUD_KNOTS;
     info->direction = pack->direction;
-    info->smask |= RMC;
+    info->smask |= XNMEA_PACKTYPE_RMC;
 }
 
 /**
@@ -522,5 +483,5 @@ void xnmea_VTG2info(xnmeaVTG *pack, xnmeaINFO *info)
     info->direction = pack->dir;
     info->declination = pack->dec;
     info->speed = pack->spk;
-    info->smask |= VTG;
+    info->smask |= XNMEA_PACKTYPE_VTG;
 }

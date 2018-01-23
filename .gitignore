@@ -4,3 +4,5 @@
 /bin
 /CMakeFiles
 /cmake_install.cmake
+/doc
+/doc/man

@@ -216,19 +216,19 @@ int xnmea_generate(
 
     while(pack_mask)
     {
-        if(pack_mask & GGA)
+        if(pack_mask & XNMEA_PACKTYPE_GGA)
         {
             xnmea_info2GGA(info, &gga);
             gen_count += xnmea_gen_GGA(buff + gen_count, buff_sz - gen_count, &gga, source);
-            pack_mask &= ~GGA;
+            pack_mask &= ~XNMEA_PACKTYPE_GGA;
         }
-        else if(pack_mask & GSA)
+        else if(pack_mask & XNMEA_PACKTYPE_GSA)
         {
             xnmea_info2GSA(info, &gsa);
             gen_count += xnmea_gen_GSA(buff + gen_count, buff_sz - gen_count, &gsa, source);
-            pack_mask &= ~GSA;
+            pack_mask &= ~XNMEA_PACKTYPE_GSA;
         }
-        else if(pack_mask & GSV)
+        else if(pack_mask & XNMEA_PACKTYPE_GSV)
         {
             gsv_count = xnmea_gsv_npack(info->satinfo.inview);
             for(gsv_it = 0; gsv_it < gsv_count && buff_sz - gen_count > 0; ++gsv_it)
@@ -236,19 +236,19 @@ int xnmea_generate(
                 xnmea_info2GSV(info, &gsv, gsv_it);
                 gen_count += xnmea_gen_GSV(buff + gen_count, buff_sz - gen_count, &gsv, source);
             }
-            pack_mask &= ~GSV;
+            pack_mask &= ~XNMEA_PACKTYPE_GSV;
         }
-        else if(pack_mask & RMC)
+        else if(pack_mask & XNMEA_PACKTYPE_RMC)
         {
             xnmea_info2RMC(info, &rmc);
             gen_count += xnmea_gen_RMC(buff + gen_count, buff_sz - gen_count, &rmc, source);
-            pack_mask &= ~RMC;
+            pack_mask &= ~XNMEA_PACKTYPE_RMC;
         }
-        else if(pack_mask & VTG)
+        else if(pack_mask & XNMEA_PACKTYPE_VTG)
         {
             xnmea_info2VTG(info, &vtg);
             gen_count += xnmea_gen_VTG(buff + gen_count, buff_sz - gen_count, &vtg, source);
-            pack_mask &= ~VTG;
+            pack_mask &= ~XNMEA_PACKTYPE_VTG;
         }
         else
             break;

@@ -94,25 +94,25 @@ int xnmea_parse(
 
     xnmea_parser_push(parser, buff, buff_sz);
 
-    while(NON != (ptype = xnmea_parser_pop(parser, &pack)))
+    while(XNMEA_PACKTYPE_NON != (ptype = xnmea_parser_pop(parser, &pack)))
     {
         nread++;
 
         switch(ptype)
         {
-        case GGA:
+        case XNMEA_PACKTYPE_GGA:
             xnmea_GGA2info((xnmeaGGA *)pack, info);
             break;
-        case GSA:
+        case XNMEA_PACKTYPE_GSA:
             xnmea_GSA2info((xnmeaGSA *)pack, info);
             break;
-        case GSV:
+        case XNMEA_PACKTYPE_GSV:
             xnmea_GSV2info((xnmeaGSV *)pack, info);
             break;
-        case RMC:
+        case XNMEA_PACKTYPE_RMC:
             xnmea_RMC2info((xnmeaRMC *)pack, info);
             break;
-        case VTG:
+        case XNMEA_PACKTYPE_VTG:
             xnmea_VTG2info((xnmeaVTG *)pack, info);
             break;
         };
@@ -178,10 +178,10 @@ int xnmea_parser_real_push(xnmeaPARSER *parser, const char *buff, int buff_sz)
 
             switch(ptype)
             {
-            case GGA:
+            case XNMEA_PACKTYPE_GGA:
                 if(0 == (node->pack = malloc(sizeof(xnmeaGGA))))
                     goto mem_fail;
-                node->packType = GGA;
+                node->packType = XNMEA_PACKTYPE_GGA;
                 if(!xnmea_parse_GGA(
                     (const char *)parser->buffer + nparsed,
                     sen_sz, (xnmeaGGA *)node->pack))
@@ -190,10 +190,10 @@ int xnmea_parser_real_push(xnmeaPARSER *parser, const char *buff, int buff_sz)
                     node = 0;
                 }
                 break;
-            case GSA:
+            case XNMEA_PACKTYPE_GSA:
                 if(0 == (node->pack = malloc(sizeof(xnmeaGSA))))
                     goto mem_fail;
-                node->packType = GSA;
+                node->packType = XNMEA_PACKTYPE_GSA;
                 if(!xnmea_parse_GSA(
                     (const char *)parser->buffer + nparsed,
                     sen_sz, (xnmeaGSA *)node->pack))
@@ -202,10 +202,10 @@ int xnmea_parser_real_push(xnmeaPARSER *parser, const char *buff, int buff_sz)
                     node = 0;
                 }
                 break;
-            case GSV:
+            case XNMEA_PACKTYPE_GSV:
                 if(0 == (node->pack = malloc(sizeof(xnmeaGSV))))
                     goto mem_fail;
-                node->packType = GSV;
+                node->packType = XNMEA_PACKTYPE_GSV;
                 if(!xnmea_parse_GSV(
                     (const char *)parser->buffer + nparsed,
                     sen_sz, (xnmeaGSV *)node->pack))
@@ -214,10 +214,10 @@ int xnmea_parser_real_push(xnmeaPARSER *parser, const char *buff, int buff_sz)
                     node = 0;
                 }
                 break;
-            case RMC:
+            case XNMEA_PACKTYPE_RMC:
                 if(0 == (node->pack = malloc(sizeof(xnmeaRMC))))
                     goto mem_fail;
-                node->packType = RMC;
+                node->packType = XNMEA_PACKTYPE_RMC;
                 if(!xnmea_parse_RMC(
                     (const char *)parser->buffer + nparsed,
                     sen_sz, (xnmeaRMC *)node->pack))
@@ -226,10 +226,10 @@ int xnmea_parser_real_push(xnmeaPARSER *parser, const char *buff, int buff_sz)
                     node = 0;
                 }
                 break;
-            case VTG:
+            case XNMEA_PACKTYPE_VTG:
                 if(0 == (node->pack = malloc(sizeof(xnmeaVTG))))
                     goto mem_fail;
-                node->packType = VTG;
+                node->packType = XNMEA_PACKTYPE_VTG;
                 if(!xnmea_parse_VTG(
                     (const char *)parser->buffer + nparsed,
                     sen_sz, (xnmeaVTG *)node->pack))
@@ -301,7 +301,7 @@ int xnmea_parser_push(xnmeaPARSER *parser, const char *buff, int buff_sz)
  */
 int xnmea_parser_top(xnmeaPARSER *parser)
 {
-    int retval = NON;
+    int retval = XNMEA_PACKTYPE_NON;
     xnmeaParserNODE *node = (xnmeaParserNODE *)parser->top_node;
 
     XNMEA_ASSERT(parser && parser->buffer);
@@ -319,7 +319,7 @@ int xnmea_parser_top(xnmeaPARSER *parser)
  */
 int xnmea_parser_pop(xnmeaPARSER *parser, void **pack_ptr)
 {
-    int retval = NON;
+    int retval = XNMEA_PACKTYPE_NON;
     xnmeaParserNODE *node = (xnmeaParserNODE *)parser->top_node;
 
     XNMEA_ASSERT(parser && parser->buffer);
@@ -344,7 +344,7 @@ int xnmea_parser_pop(xnmeaPARSER *parser, void **pack_ptr)
  */
 int xnmea_parser_peek(xnmeaPARSER *parser, void **pack_ptr)
 {
-    int retval = NON;
+    int retval = XNMEA_PACKTYPE_NON;
     xnmeaParserNODE *node = (xnmeaParserNODE *)parser->top_node;
 
     XNMEA_ASSERT(parser && parser->buffer);
@@ -361,11 +361,11 @@ int xnmea_parser_peek(xnmeaPARSER *parser, void **pack_ptr)
 /**
  * \brief Delete top packet from parser
  * @return Deleted packet type
- * @see nmeaPACKTYPE
+ * @see xnmeaPACKTYPE
  */
 int xnmea_parser_drop(xnmeaPARSER *parser)
 {
-    int retval = NON;
+    int retval = XNMEA_PACKTYPE_NON;
     xnmeaParserNODE *node = (xnmeaParserNODE *)parser->top_node;
 
     XNMEA_ASSERT(parser && parser->buffer);

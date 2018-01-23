@@ -20,14 +20,14 @@
 
 #include "info.h"
 
-#define XNMEA_PI                     (3.141592653589793)             /**< PI value */
-#define XNMEA_PI180                  (XNMEA_PI / 180)                 /**< PI division by 180 */
-#define XNMEA_EARTHRADIUS_KM         (6378)                          /**< Earth's mean radius in km */
-#define XNMEA_EARTHRADIUS_M          (XNMEA_EARTHRADIUS_KM * 1000)    /**< Earth's mean radius in m */
-#define XNMEA_EARTH_SEMIMAJORAXIS_M  (6378137.0)                     /**< Earth's semi-major axis in m according WGS84 */
-#define XNMEA_EARTH_SEMIMAJORAXIS_KM (XNMEA_EARTHMAJORAXIS_KM / 1000) /**< Earth's semi-major axis in km according WGS 84 */
-#define XNMEA_EARTH_FLATTENING       (1 / 298.257223563)             /**< Earth's flattening according WGS 84 */
-#define XNMEA_DOP_FACTOR             (5)                             /**< Factor for translating DOP to meters */
+#define XNMEA_PI                     (3.141592653589793)                /**< PI value */
+#define XNMEA_PI180                  (XNMEA_PI / 180)                   /**< PI division by 180 */
+#define XNMEA_EARTHRADIUS_KM         (6378)                             /**< Earth's mean radius in km */
+#define XNMEA_EARTHRADIUS_M          (XNMEA_EARTHRADIUS_KM * 1000)      /**< Earth's mean radius in m */
+#define XNMEA_EARTH_SEMIMAJORAXIS_M  (6378137.0)                        /**< Earth's semi-major axis in m according WGS84 */
+#define XNMEA_EARTH_SEMIMAJORAXIS_KM (XNMEA_EARTHMAJORAXIS_KM / 1000)   /**< Earth's semi-major axis in km according WGS 84 */
+#define XNMEA_EARTH_FLATTENING       (1 / 298.257223563)                /**< Earth's flattening according WGS 84 */
+#define XNMEA_DOP_FACTOR             (5)                                /**< Factor for translating DOP to meters */
 
 #ifdef  __cplusplus
 extern "C" {

@@ -83,7 +83,7 @@ WARN_LOGFILE           =
 # configuration options related to the input files
 #---------------------------------------------------------------------------
 INPUT                  = ../src \
-                         ../include/nmea
+                         ../include/xnmea
 FILE_PATTERNS          = *.c \
                          *.h
 RECURSIVE              = NO
@@ -125,7 +125,7 @@ HTML_FOOTER            =
 HTML_STYLESHEET        =
 HTML_ALIGN_MEMBERS     = YES
 GENERATE_HTMLHELP      = YES
-CHM_FILE               = nmealib.chm
+CHM_FILE               = xnmealib.chm
 HHC_LOCATION           =
 GENERATE_CHI           = NO
 BINARY_TOC             = NO

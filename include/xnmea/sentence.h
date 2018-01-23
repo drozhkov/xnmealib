@@ -31,12 +31,12 @@ extern "C" {
  */
 enum xnmeaPACKTYPE
 {
-    NON   = 0x0000,   /**< Unknown packet type. */
-    GGA   = 0x0001,   /**< GGA - Essential fix data which provide 3D location and accuracy data. */
-    GSA   = 0x0002,   /**< GSA - GPS receiver operating mode, SVs used for navigation, and DOP values. */
-    GSV   = 0x0004,   /**< GSV - Number of SVs in view, PRN numbers, elevation, azimuth & SNR values. */
-    RMC   = 0x0008,   /**< RMC - Recommended Minimum Specific GPS/TRANSIT Data. */
-    VTG   = 0x0010    /**< VTG - Actual track made good and speed over ground. */
+    XNMEA_PACKTYPE_NON   = 0x0000,   /**< Unknown packet type. */
+    XNMEA_PACKTYPE_GGA   = 0x0001,   /**< GGA - Essential fix data which provide 3D location and accuracy data. */
+    XNMEA_PACKTYPE_GSA   = 0x0002,   /**< GSA - GPS receiver operating mode, SVs used for navigation, and DOP values. */
+    XNMEA_PACKTYPE_GSV   = 0x0004,   /**< GSV - Number of SVs in view, PRN numbers, elevation, azimuth & SNR values. */
+    XNMEA_PACKTYPE_RMC   = 0x0008,   /**< RMC - Recommended Minimum Specific GPS/TRANSIT Data. */
+    XNMEA_PACKTYPE_VTG   = 0x0010    /**< VTG - Actual track made good and speed over ground. */
 };
 
 typedef enum _xnmeaSOURCE

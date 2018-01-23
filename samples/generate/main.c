@@ -38,7 +38,7 @@ int main()
     {
         gen_sz = xnmea_generate(
             &buff[0], 2048, &info,
-            GGA | GSA | GSV | RMC | VTG,
+            XNMEA_PACKTYPE_GGA | XNMEA_PACKTYPE_GSA | XNMEA_PACKTYPE_GSV | XNMEA_PACKTYPE_RMC | XNMEA_PACKTYPE_VTG,
             XNMEA_SOURCE_GPS );
 
         buff[gen_sz] = 0;
